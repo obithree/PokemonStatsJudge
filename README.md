@@ -1,1 +1,1 @@
-# Pokemon_Auto_-Individual
+# PokemonStatsJudge
