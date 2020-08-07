@@ -1,0 +1,26 @@
+@startuml
+left to right direction
+actor ユーザー
+actor PokemonStatsJudge
+
+rectangle ニンテンドースイッチ { 
+    usecase ポケモンのステータス画面のスクリーンショットを取る
+    usecase スクショをツイート
+    スクショをツイート .left.> ポケモンのステータス画面のスクリーンショットを取る : <<include>>
+    ユーザー --> ポケモンのステータス画面のスクリーンショットを取る 
+    ユーザー --> スクショをツイート
+    note "ニンテンドースイッチのツイート機能を使用する。\nそのツイートをPokemonStatsJudgeが読み込む" as tweet_note
+}
+
+
+rectangle PokemonStatsJudge {
+    usecase リプライでポケモンの個体値と努力値を送る
+
+    usecase スクリーンショットからステータス読み込み
+    usecase ポケモンのステータスを判定
+    スクリーンショットからステータス読み込み .left.> ポケモンのステータスを判定 : <<include>>
+    スクショをツイート --> ポケモンのステータスを判定
+    ポケモンのステータスを判定 -left-> リプライでポケモンの個体値と努力値を送る
+}
+
+@enduml
