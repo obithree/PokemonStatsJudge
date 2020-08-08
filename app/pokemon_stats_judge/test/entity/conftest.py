@@ -24,9 +24,9 @@ def test_pokemon_stats():
         'pokemon_stat_hp': 320,
         'pokemon_stat_atk': 170,
         'pokemon_stat_def': 109,
-        'pokemon_stat_spcl_atk': 287,
-        'pokemon_stat_spcl_def': 138,
-        'pokemon_stat_speed': 113
+        'pokemon_stat_spcl_atk': 138,
+        'pokemon_stat_spcl_def': 113,
+        'pokemon_stat_speed': 287
     }
     return hinoyakoma_stats
 
