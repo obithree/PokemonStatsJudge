@@ -1,15 +1,8 @@
 import dataclasses
+from .pokemon_base_stats import PokemonBaseStats
+from .pokemon_evs import PokemonEffortValues
+from .pokemon_ivs import PokemonIndividualValues
 
-
-@dataclasses.dataclass(frozen=True)
-class PokemonBaseStats:
-    pokemon_name: str
-    pokemon_base_hp: int
-    pokemon_base_atk: int
-    pokemon_base_def: int
-    pokemon_base_spcl_atk: int
-    pokemon_base_spcl_def: int
-    pokemon_base_speed: int
 
 @dataclasses.dataclass(frozen=True)
 class Pokemon:
@@ -23,3 +16,8 @@ class Pokemon:
     pokemon_stat_spcl_def: int
     pokemon_stat_speed: int
     pokemon_base_stats: PokemonBaseStats
+    #pokemon_ivs: PokemonIndividualValues = dataclasses.field(default_factory=dict)
+    #pokemon_evs: PokemonEffortValues = dataclasses.field(default_factory=dict)
+
+    def _update_pokemon_ivs(self):
+        pass
