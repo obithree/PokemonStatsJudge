@@ -41,10 +41,18 @@ class Pokemon:
             stat_change = level + 10
         else:
             stat_change = 5
-        estimate_ivs = ( 100 * ( pokemon_stat / nature_change - stat_change ) / level ) - ( base_stat * 2 ) - ( evs / 4 )
-        if estimate_ivs > 31:
-            estimate_ivs = 31
-        return estimate_ivs
+        estimate_ivs_list = []
+        # 0から31の数字で総当りを行う。切り捨てで一致したものをlistにいれる。
+        for estimate_ivs_i in range(32):
+            estimate_pokemon_stat = ((base_stat * 2 + estimate_ivs_i + (evs / 4)) * level / 100 + stat_change) * nature_change
+            if pokemon_stat == int(estimate_pokemon_stat):
+                estimate_ivs_list.append(estimate_ivs_i)
+        # listが空で、ivsを直接計算した時、31を超えていた場合、31をlistに入れる。
+        if not estimate_ivs_list:
+            estimate_ivs = ( 100 * ( pokemon_stat / nature_change - stat_change ) / level ) - ( base_stat * 2 ) - ( evs / 4 )
+            if estimate_ivs > 31:
+                estimate_ivs_list.append(31)
+        return estimate_ivs_list
 
     @classmethod
     def _estimate_stat_evs(cls, level, nature_change, pokemon_stat, base_stat, ivs, estimate_hp=False):

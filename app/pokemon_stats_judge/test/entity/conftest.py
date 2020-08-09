@@ -23,7 +23,7 @@ def test_pokemon_stats():
         'pokemon_nature': 'せっかち',
         'pokemon_stat_hp': 320,
         'pokemon_stat_atk': 170,
-        'pokemon_stat_def': 109,
+        'pokemon_stat_def': 108,
         'pokemon_stat_spcl_atk': 138,
         'pokemon_stat_spcl_def': 113,
         'pokemon_stat_speed': 287
@@ -47,7 +47,7 @@ def test_evs():
     hinoyakoma_evs = {
         "evs_hp": 252,
         "evs_atk": 0,
-        "evs_def": 4,
+        "evs_def": 0,
         "evs_spcl_atk": 0,
         "evs_spcl_def": 0,
         "evs_speed": 252

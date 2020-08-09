@@ -61,7 +61,7 @@ class TestPokemon(object):
             base_stat=test_base_stats['base_hp'],
             estimate_hp=True
         )
-        assert estimate_ivs_hp == 31
+        assert estimate_ivs_hp == [31]
         estimate_ivs_spcl_def = Pokemon._estimate_stat_ivs(
             level=test_pokemon_stats['pokemon_stat_level'],
             nature_change=1.0,
@@ -69,7 +69,16 @@ class TestPokemon(object):
             base_stat=test_base_stats['base_spcl_def'],
             estimate_hp=False
         )
-        assert estimate_ivs_spcl_def == test_ivs['ivs_spcl_def']
+        assert estimate_ivs_spcl_def == [test_ivs['ivs_spcl_def']]
+
+        estimate_ivs_def = Pokemon._estimate_stat_ivs(
+            level=test_pokemon_stats['pokemon_stat_level'],
+            nature_change=0.9,
+            pokemon_stat=test_pokemon_stats['pokemon_stat_def'],
+            base_stat=test_base_stats['base_def'],
+            estimate_hp=False
+        )
+        assert estimate_ivs_def == [5, 6]
 
     def test_estimate_stat_ev(self, test_pokemon_stats, test_base_stats, test_evs, test_ivs):
         estimate_evs_hp = Pokemon._estimate_stat_evs(
