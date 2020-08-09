@@ -20,8 +20,8 @@ def test_pokemon_stats():
         'pokemon_level': 100,
         'pokemon_nature': 'せっかち',
         'pokemon_stat_hp': 320,
-        'pokemon_stat_atk': 170,
-        'pokemon_stat_def': 108,
+        'pokemon_stat_phys_atk': 170,
+        'pokemon_stat_phys_def': 108,
         'pokemon_stat_spcl_atk': 138,
         'pokemon_stat_spcl_def': 113,
         'pokemon_stat_speed': 287
