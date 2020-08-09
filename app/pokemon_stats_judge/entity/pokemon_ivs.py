@@ -3,9 +3,9 @@ from typing import List
 
 @dataclasses.dataclass(frozen=True)
 class PokemonIndividualValues:
-    ivs_hp: List[int]
-    ivs_atk: List[int]
-    ivs_def: List[int]
-    ivs_spcl_atk: List[int]
-    ivs_spcl_def: List[int]
-    ivs_speed: List[int]
+    hp: List[int]
+    phys_atk: List[int]
+    phys_def: List[int]
+    spcl_atk: List[int]
+    spcl_def: List[int]
+    speed: List[int]

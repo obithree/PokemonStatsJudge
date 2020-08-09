@@ -8,12 +8,11 @@ from pokemon_stats_judge.entity.pokemon import PokemonIndividualValues
 class TestPokemonBaseStats(object):
     def test_create_base_stats(self, test_base_stats):
         pokemon_base_stats = PokemonBaseStats(
-            test_base_stats['pokemon_name'],
-            test_base_stats['base_hp'],
-            test_base_stats['base_atk'],
-            test_base_stats['base_def'],
-            test_base_stats['base_spcl_atk'],
-            test_base_stats['base_spcl_def'],
-            test_base_stats['base_speed']
+            test_base_stats['hp'],
+            test_base_stats['phys_atk'],
+            test_base_stats['phys_def'],
+            test_base_stats['spcl_atk'],
+            test_base_stats['spcl_def'],
+            test_base_stats['speed']
         )
-        assert pokemon_base_stats.pokemon_name == 'ヒノヤコマ' 
+        assert pokemon_base_stats.hp == 62

@@ -8,24 +8,24 @@ from pokemon_stats_judge.entity.pokemon import PokemonIndividualValues
 class TestPokemonEffortValues(object):
     def test_create_evs(self, test_evs):
         evs = PokemonEffortValues(
-            evs_hp=test_evs['evs_hp'],
-            evs_atk=test_evs['evs_atk'],
-            evs_def=test_evs['evs_def'],
-            evs_spcl_atk=test_evs['evs_spcl_atk'],
-            evs_spcl_def=test_evs['evs_spcl_def'],
-            evs_speed=test_evs['evs_speed']
+            hp=test_evs['hp'],
+            phys_atk=test_evs['phys_atk'],
+            phys_def=test_evs['phys_def'],
+            spcl_atk=test_evs['spcl_atk'],
+            spcl_def=test_evs['spcl_def'],
+            speed=test_evs['speed']
         )
-        assert evs.evs_hp is 252
+        assert evs.hp is 252
     
     def test_schema_evs(self, test_evs):
         try:
             evs = PokemonEffortValues(
-                evs_hp=test_evs['evs_hp'],
-                evs_atk=test_evs['evs_atk'],
-                evs_def=test_evs['evs_def'],
-                evs_spcl_atk=test_evs['evs_spcl_atk'],
-                evs_spcl_def=test_evs['evs_spcl_def'],
-                evs_speed=test_evs['evs_speed']
+                hp=test_evs['hp'],
+                phys_atk=test_evs['phys_atk'],
+                phys_def=test_evs['phys_def'],
+                spcl_atk=test_evs['spcl_atk'],
+                spcl_def=test_evs['spcl_def'],
+                speed=test_evs['speed']
             )
         except EffortValuesError:
             pass

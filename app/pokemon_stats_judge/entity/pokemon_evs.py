@@ -3,20 +3,20 @@ import dataclasses
 
 @dataclasses.dataclass(frozen=True)
 class PokemonEffortValues:
-    evs_hp: int
-    evs_atk: int
-    evs_def: int
-    evs_spcl_atk: int
-    evs_spcl_def: int
-    evs_speed: int
+    hp: int
+    phys_atk: int
+    phys_def: int
+    spcl_atk: int
+    spcl_def: int
+    speed: int
 
     def __post_init__(self):
-        self._ev_check(self.evs_hp)
-        self._ev_check(self.evs_atk)
-        self._ev_check(self.evs_def)
-        self._ev_check(self.evs_spcl_atk)
-        self._ev_check(self.evs_spcl_def)
-        self._ev_check(self.evs_speed)
+        self._ev_check(self.hp)
+        self._ev_check(self.phys_atk)
+        self._ev_check(self.phys_def)
+        self._ev_check(self.spcl_atk)
+        self._ev_check(self.spcl_def)
+        self._ev_check(self.speed)
 
     def _ev_check(self, ev):
         if ev > 255 or ev < 0:
