@@ -4,22 +4,20 @@ import pytest
 @pytest.fixture(autouse=True, scope='class')
 def test_base_stats():
     hinoyakoma_base_stats = {
-        'pokemon_name': 'ヒノヤコマ',
-        'base_hp': 62,
-        'base_atk': 73,
-        'base_def': 55,
-        'base_spcl_atk': 56,
-        'base_spcl_def': 52,
-        'base_speed': 84
+        'hp': 62,
+        'phys_atk': 73,
+        'phys_def': 55,
+        'spcl_atk': 56,
+        'spcl_def': 52,
+        'speed': 84
     }
-    print(hinoyakoma_base_stats)
     return hinoyakoma_base_stats
 
 @pytest.fixture(autouse=True, scope='class')
 def test_pokemon_stats():
     hinoyakoma_stats = {
         'pokemon_name': 'ヒノヤコマ',
-        'pokemon_stat_level': 100,
+        'pokemon_level': 100,
         'pokemon_nature': 'せっかち',
         'pokemon_stat_hp': 320,
         'pokemon_stat_atk': 170,
@@ -33,23 +31,23 @@ def test_pokemon_stats():
 @pytest.fixture(autouse=True, scope='class')
 def test_ivs():
     hinoyakoma_ivs = {
-        "ivs_hp": 23,
-        "ivs_atk": 19,
-        "ivs_def": 6,
-        "ivs_spcl_atk": 21,
-        "ivs_spcl_def": 4,
-        "ivs_speed": 25
+        "hp": 23,
+        "phys_atk": 19,
+        "phys_def": 6,
+        "spcl_atk": 21,
+        "spcl_def": 4,
+        "speed": 25
     }
     return hinoyakoma_ivs
 
 @pytest.fixture(autouse=True, scope='class')
 def test_evs():
     hinoyakoma_evs = {
-        "evs_hp": 252,
-        "evs_atk": 0,
-        "evs_def": 0,
-        "evs_spcl_atk": 0,
-        "evs_spcl_def": 0,
-        "evs_speed": 252
+        "hp": 252,
+        "phys_atk": 0,
+        "phys_def": 0,
+        "spcl_atk": 0,
+        "spcl_def": 0,
+        "speed": 252
     }
     return hinoyakoma_evs
