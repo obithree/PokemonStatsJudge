@@ -1,5 +1,6 @@
 import dataclasses
-
+from pokemon_stats_judge.entity.Exception.pokemon_exception import InvalidEffortValueException
+from pokemon_stats_judge.entity.Exception.pokemon_exception import InvalidEffortValuesException
 
 @dataclasses.dataclass(frozen=True)
 class PokemonEffortValues:
@@ -11,15 +12,19 @@ class PokemonEffortValues:
     speed: int
 
     def __post_init__(self):
-        self._ev_check(self.hp)
-        self._ev_check(self.phys_atk)
-        self._ev_check(self.phys_def)
-        self._ev_check(self.spcl_atk)
-        self._ev_check(self.spcl_def)
-        self._ev_check(self.speed)
+        evs_dict = dataclasses.asdict(self)
+        for stat, effort_value in evs_dict.items():
+            self._ev_check(stat, effort_value)
+        self._ev_sum_check(evs_dict)
 
-    def _ev_check(self, ev):
-        if ev > 255 or ev < 0:
-            raise EffortValuesError()
-            # TODO: Logger作成
-            # raise EffortValuesError()
+    @classmethod
+    def _ev_check(cls, stat, effort_value):
+        if effort_value > 255 or effort_value < 0:
+            raise InvalidEffortValueException(stat, effort_value)
+
+    @classmethod
+    def _ev_sum_check(cls, evs_dict):
+        evs_sum = sum(evs_dict.values())
+        print(evs_sum)
+        if evs_sum > 510 or evs_sum < 0:
+            raise InvalidEffortValuesException(evs_sum)
