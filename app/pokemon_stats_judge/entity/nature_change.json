@@ -1,0 +1,203 @@
+{
+    "さみしがり": {
+        "hp": 1.0,
+        "phys_atk": 1.1,
+        "phys_def": 0.9,
+        "spcl_atk": 1.0,
+        "spcl_def": 1.0,
+        "speed": 1.0
+    },
+    "いじっぱり": {
+        "hp": 1.0,
+        "phys_atk": 1.1,
+        "phys_def": 1.0,
+        "spcl_atk": 0.9,
+        "spcl_def": 1.0,
+        "speed": 1.0
+    },
+    "やんちゃ": {
+        "hp": 1.0,
+        "phys_atk": 1.1,
+        "phys_def": 1.0,
+        "spcl_atk": 1.0,
+        "spcl_def": 0.9,
+        "speed": 1.0
+    },
+    "ゆうかん": {
+        "hp": 1.0,
+        "phys_atk": 1.1,
+        "phys_def": 1.0,
+        "spcl_atk": 1.0,
+        "spcl_def": 1.0,
+        "speed": 0.9
+    },
+    "ずぶとい": {
+        "hp": 1.0,
+        "phys_atk": 0.9,
+        "phys_def": 1.1,
+        "spcl_atk": 1.0,
+        "spcl_def": 1.0,
+        "speed": 1.0
+    },
+    "わんぱく": {
+        "hp": 1.0,
+        "phys_atk": 1.0,
+        "phys_def": 1.1,
+        "spcl_atk": 0.9,
+        "spcl_def": 1.0,
+        "speed": 1.0
+    },
+    "のうてんき": {
+        "hp": 1.0,
+        "phys_atk": 1.0,
+        "phys_def": 1.1,
+        "spcl_atk": 1.0,
+        "spcl_def": 0.9,
+        "speed": 1.0
+    },
+    "のんき": {
+        "hp": 1.0,
+        "phys_atk": 1.0,
+        "phys_def": 1.1,
+        "spcl_atk": 1.0,
+        "spcl_def": 1.0,
+        "speed": 0.9
+    },
+    "ひかえめ": {
+        "hp": 1.0,
+        "phys_atk": 0.9,
+        "phys_def": 1.0,
+        "spcl_atk": 1.1,
+        "spcl_def": 1.0,
+        "speed": 1.0
+    },
+    "おっとり": {
+        "hp": 1.0,
+        "phys_atk": 1.0,
+        "phys_def": 0.9,
+        "spcl_atk": 1.1,
+        "spcl_def": 1.0,
+        "speed": 1.0
+    },
+    "うっかりや": {
+        "hp": 1.0,
+        "phys_atk": 1.0,
+        "phys_def": 1.0,
+        "spcl_atk": 1.1,
+        "spcl_def": 0.9,
+        "speed": 1.0
+    },
+    "れいせい": {
+        "hp": 1.0,
+        "phys_atk": 1.0,
+        "phys_def": 1.0,
+        "spcl_atk": 1.1,
+        "spcl_def": 1.0,
+        "speed": 0.9
+    },
+    "おだやか": {
+        "hp": 1.0,
+        "phys_atk": 0.9,
+        "phys_def": 1.0,
+        "spcl_atk": 1.0,
+        "spcl_def": 1.1,
+        "speed": 1.0
+    },
+    "おとなしい": {
+        "hp": 1.0,
+        "phys_atk": 1.0,
+        "phys_def": 0.9,
+        "spcl_atk": 1.0,
+        "spcl_def": 1.1,
+        "speed": 1.0
+    },
+    "しんちょう": {
+        "hp": 1.0,
+        "phys_atk": 1.0,
+        "phys_def": 1.0,
+        "spcl_atk": 0.9,
+        "spcl_def": 1.1,
+        "speed": 1.0
+    },
+    "なまいき": {
+        "hp": 1.0,
+        "phys_atk": 1.0,
+        "phys_def": 1.0,
+        "spcl_atk": 1.0,
+        "spcl_def": 1.1,
+        "speed": 0.9
+    },
+    "おくびょう": {
+        "hp": 1.0,
+        "phys_atk": 0.9,
+        "phys_def": 1.0,
+        "spcl_atk": 1.0,
+        "spcl_def": 1.0,
+        "speed": 1.1
+    },
+    "せっかち": {
+        "hp": 1.0,
+        "phys_atk": 1.0,
+        "phys_def": 0.9,
+        "spcl_atk": 1.0,
+        "spcl_def": 1.0,
+        "speed": 1.1
+    },
+    "ようき": {
+        "hp": 1.0,
+        "phys_atk": 1.0,
+        "phys_def": 1.0,
+        "spcl_atk": 0.9,
+        "spcl_def": 1.0,
+        "speed": 1.1
+    },
+    "むじゃき": {
+        "hp": 1.0,
+        "phys_atk": 1.0,
+        "phys_def": 1.0,
+        "spcl_atk": 1.0,
+        "spcl_def": 0.9,
+        "speed": 1.1
+    },
+    "てれや": {
+        "hp": 1.0,
+        "phys_atk": 1.0,
+        "phys_def": 1.0,
+        "spcl_atk": 1.0,
+        "spcl_def": 1.0,
+        "speed": 1.0
+    },
+    "がんばりや": {
+        "hp": 1.0,
+        "phys_atk": 1.0,
+        "phys_def": 1.0,
+        "spcl_atk": 1.0,
+        "spcl_def": 1.0,
+        "speed": 1.0
+    },
+    "すなお": {
+        "hp": 1.0,
+        "phys_atk": 1.0,
+        "phys_def": 1.0,
+        "spcl_atk": 1.0,
+        "spcl_def": 1.0,
+        "speed": 1.0
+    },
+    "きまぐれ": {
+        "hp": 1.0,
+        "phys_atk": 1.0,
+        "phys_def": 1.0,
+        "spcl_atk": 1.0,
+        "spcl_def": 1.0,
+        "speed": 1.0
+    },
+    "まじめ": {
+        "hp": 1.0,
+        "phys_atk": 1.0,
+        "phys_def": 1.0,
+        "spcl_atk": 1.0,
+        "spcl_def": 1.0,
+        "speed": 1.0
+    }
+}
+
