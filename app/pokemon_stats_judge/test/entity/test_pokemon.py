@@ -49,10 +49,40 @@ class TestPokemon(object):
         ) 
         test_pokemon = test_pokemon.is_updated_by_replacing_base_stats(pokemon_base_stats)
         assert test_pokemon.pokemon_base_stats.hp == test_base_stats['hp']
-        #assert test_pokemon.pokemon_ivs.ivs_hp == test_ivs['ivs_hp']
-        #assert test_pokemon.pokemon_evs.evs_hp == test_evs['evs_hp']
 
-    def test_estimate_stat_iv(self, test_pokemon_stats, test_base_stats, test_evs, test_ivs):
+    def test_is_updated_by_estimating_ivs_and_evs(self, test_pokemon_stats, test_base_stats, test_evs, test_ivs):
+        pokemon_base_stats = PokemonBaseStats(
+            test_base_stats['hp'],
+            test_base_stats['phys_atk'],
+            test_base_stats['phys_def'],
+            test_base_stats['spcl_atk'],
+            test_base_stats['spcl_def'],
+            test_base_stats['speed']
+        )
+        test_pokemon = Pokemon(
+                                test_pokemon_stats['pokemon_name'],
+                                test_pokemon_stats['pokemon_level'],
+                                test_pokemon_stats['pokemon_nature'],
+                                test_pokemon_stats['pokemon_stat_hp'],
+                                test_pokemon_stats['pokemon_stat_phys_atk'],
+                                test_pokemon_stats['pokemon_stat_phys_def'],
+                                test_pokemon_stats['pokemon_stat_spcl_atk'],
+                                test_pokemon_stats['pokemon_stat_spcl_def'],
+                                test_pokemon_stats['pokemon_stat_speed'],
+        ) 
+        test_pokemon = test_pokemon.is_updated_by_replacing_base_stats(pokemon_base_stats)
+        test_pokemon = test_pokemon.is_updated_by_estimating_ivs_and_evs()
+        assert test_pokemon.pokemon_ivs.hp == [31]
+        assert test_pokemon.pokemon_ivs.phys_def == [5,6]
+        assert test_pokemon.pokemon_evs.hp == 220
+        assert test_pokemon.pokemon_evs.phys_def == 0
+        assert test_pokemon.pokemon_evs.speed == 228
+
+    def test_create_nature_change_dict(self):
+        nature_change_dict = Pokemon._create_nature_change_dict('ひかえめ')
+        assert nature_change_dict['spcl_atk'] == 1.1
+
+    def test_estimate_stat_ivs(self, test_pokemon_stats, test_base_stats, test_evs, test_ivs):
         estimate_ivs_hp = Pokemon._estimate_stat_ivs(
             level=test_pokemon_stats['pokemon_level'],
             nature_change=1.0,
@@ -79,7 +109,7 @@ class TestPokemon(object):
         )
         assert estimate_phys_def == [5, 6]
 
-    def test_estimate_stat_ev(self, test_pokemon_stats, test_base_stats, test_evs, test_ivs):
+    def test_estimate_stat_evs(self, test_pokemon_stats, test_base_stats, test_evs, test_ivs):
         estimate_evs_hp = Pokemon._estimate_stat_evs(
             level=test_pokemon_stats['pokemon_level'],
             nature_change=1.0,

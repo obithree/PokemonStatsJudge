@@ -1,4 +1,6 @@
 import dataclasses
+import os
+import math
 import json
 from .pokemon_base_stats import PokemonBaseStats
 from .pokemon_evs import PokemonEffortValues
@@ -45,11 +47,6 @@ class Pokemon:
             update_pokemon = dataclasses.replace(self, pokemon_ivs=pokemon_ivs, pokemon_evs=pokemon_evs)
             return update_pokemon
 
-    @classmethod
-    def _create_nature_change_dict(cls, pokemon_nature):
-        with open('.nature_change.json') as nature_change_dict:
-            return nature_change_dict[pokemon_nature]
-
     def _estimate_ivs_and_evs(self):
         pokemon_stat_dict = self._create_pokemon_stat_dict()
         base_stat_dict = dataclasses.asdict(self.pokemon_base_stats)
@@ -89,9 +86,16 @@ class Pokemon:
         return estimate_ivs_dict, estimate_evs_dict
 
     @classmethod
+    def _create_nature_change_dict(cls, pokemon_nature):
+        nature_change_json_path = f'{os.path.dirname(__file__)}/nature_change.json'
+        with open(nature_change_json_path, encoding="utf-8") as nature_change_json:
+            nature_change_dict = json.load(nature_change_json)
+            return nature_change_dict[pokemon_nature]
+
+    @classmethod
     def _estimate_stat_ivs(cls, level, nature_change, pokemon_stat, base_stat, evs_int=0, estimate_hp=False):
         """努力値を0として扱い、個体値を計算する。
-        仮に努力値が振られて個体値が31を超えた場合、個体値は31とする。
+        仮に努力値が振られて個体値が31を超えている場合でも、その値を返す。
         """
         if estimate_hp:
             stat_change = level + 10
@@ -117,5 +121,5 @@ class Pokemon:
             stat_change = level + 10
         else:
             stat_change = 5
-        estimate_evs = 4 * ( ( 100 * ( pokemon_stat / nature_change - stat_change ) / level ) - ( base_stat * 2 ) - ivs_int )
-        return estimate_evs
+        estimate_evs = 4 * ( math.ceil( 100 * ( pokemon_stat / nature_change - stat_change ) / level ) - ( base_stat * 2 ) - ivs_int )
+        return int(estimate_evs)
