@@ -11,10 +11,10 @@ class PokemonBaseStats:
     spcl_def: int
     speed: int
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         self.is_valid()
 
-    def get_dict(self) -> None:
+    def get_dict(self) -> dict:
         return dataclasses.asdict(self)
 
     def is_valid(self) -> None:
