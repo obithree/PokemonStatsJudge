@@ -3,7 +3,8 @@ import pytest
 from pokemon_stats_judge.entity.pokemon import Pokemon
 from pokemon_stats_judge.entity.pokemon import PokemonBaseStats
 from pokemon_stats_judge.entity.pokemon import PokemonIndividualValues
-from pokemon_stats_judge.entity.pokemon import PokemonIndividualValues
+from pokemon_stats_judge.entity.Exception.pokemon_exception import InvalidArgumentTypeException
+from pokemon_stats_judge.entity.Exception.pokemon_exception import InvalidIndividualValueException
 
 
 class TestPokemonIndividualValues(object):
@@ -16,17 +17,38 @@ class TestPokemonIndividualValues(object):
             spcl_def=test_ivs['spcl_def'],
             speed=test_ivs['speed']
         )
-        assert ivs.hp is 23
-    
-    def test_schema_ivs(self, test_ivs):
-        try:
-            ivs = PokemonIndividualValues(
-                hp=test_ivs['hp'],
-                phys_atk=test_ivs['phys_atk'],
-                phys_def=test_ivs['phys_def'],
-                spcl_atk=test_ivs['spcl_atk'],
-                spcl_def=test_ivs['spcl_def'],
-                speed=test_ivs['speed']
+        assert ivs.hp[0] is 23
+
+    def test_get_dict(self, test_ivs):
+        ivs = PokemonIndividualValues(
+            hp=test_ivs['hp'],
+            phys_atk=test_ivs['phys_atk'],
+            phys_def=test_ivs['phys_def'],
+            spcl_atk=test_ivs['spcl_atk'],
+            spcl_def=test_ivs['spcl_def'],
+            speed=test_ivs['speed']
+        )
+        ivs_dict = ivs.get_dict()
+        assert isinstance(ivs_dict, dict)
+
+    def test_is_valid(self, test_ivs):
+        with pytest.raises(InvalidArgumentTypeException):
+            PokemonIndividualValues(
+                hp=[7,8],
+                phys_atk=[7,8],
+                phys_def=[7,8],
+                spcl_atk=[7,8],
+                spcl_def=[7,8],
+                speed=39
             )
-        except IndividualValuesError:
-            pass
+
+    def test_schema_ivs_value(self, test_ivs):
+        with pytest.raises(InvalidIndividualValueException):
+            PokemonIndividualValues(
+                hp=[7,8],
+                phys_atk=[7,8],
+                phys_def=[7,8],
+                spcl_atk=[7,8],
+                spcl_def=[7,8],
+                speed=[39]
+            )
