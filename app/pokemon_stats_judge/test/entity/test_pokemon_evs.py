@@ -19,7 +19,19 @@ class TestPokemonEffortValues(object):
             speed=test_evs['speed']
         )
         assert evs.hp is 252
-    
+
+    def test_get_dict(self, test_evs):
+        evs = PokemonEffortValues(
+            hp=test_evs['hp'],
+            phys_atk=test_evs['phys_atk'],
+            phys_def=test_evs['phys_def'],
+            spcl_atk=test_evs['spcl_atk'],
+            spcl_def=test_evs['spcl_def'],
+            speed=test_evs['speed']
+        )
+        evs_dict = evs.get_dict()
+        assert isinstance(evs_dict, dict)
+
     def test_schema_evs_value(self, test_evs):
         with pytest.raises(InvalidEffortValueException):
             PokemonEffortValues(

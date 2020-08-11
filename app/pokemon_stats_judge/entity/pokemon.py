@@ -22,6 +22,9 @@ class Pokemon:
     pokemon_ivs: PokemonIndividualValues = None
     pokemon_evs: PokemonEffortValues = None
 
+    def get_dict(self):
+        return dataclasses.asdict(self)
+
     def _create_pokemon_stat_dict(self):
         pokemon_stat_dict = {
             "hp": self.pokemon_stat_hp,

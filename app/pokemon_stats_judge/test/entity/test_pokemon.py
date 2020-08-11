@@ -26,6 +26,25 @@ class TestPokemon(object):
         ) 
         assert test_pokemon.pokemon_name == test_pokemon_stats['pokemon_name']
 
+    def test_get_dict(self, test_pokemon_stats, test_base_stats):
+        """get_dictメソッドでdict型を返すかテストする。
+        """
+
+        test_pokemon = Pokemon(
+                                test_pokemon_stats['pokemon_name'],
+                                test_pokemon_stats['pokemon_level'],
+                                test_pokemon_stats['pokemon_nature'],
+                                test_pokemon_stats['pokemon_stat_hp'],
+                                test_pokemon_stats['pokemon_stat_phys_atk'],
+                                test_pokemon_stats['pokemon_stat_phys_def'],
+                                test_pokemon_stats['pokemon_stat_spcl_atk'],
+                                test_pokemon_stats['pokemon_stat_spcl_def'],
+                                test_pokemon_stats['pokemon_stat_speed'],
+        ) 
+        test_pokemon_dict = test_pokemon.get_dict() 
+        assert isinstance(test_pokemon_dict, dict)
+
+
     def test_is_updated_by_replacing_base_stats(self, test_pokemon_stats, test_base_stats, test_evs, test_ivs):
         pokemon_base_stats = PokemonBaseStats(
             test_base_stats['hp'],
@@ -98,7 +117,7 @@ class TestPokemon(object):
             base_stat=test_base_stats['spcl_def'],
             estimate_hp=False
         )
-        assert estimate_ivs_spcl_def == [test_ivs['spcl_def']]
+        assert estimate_ivs_spcl_def == test_ivs['spcl_def']
 
         estimate_phys_def = Pokemon._estimate_stat_ivs(
             level=test_pokemon_stats['pokemon_level'],
@@ -115,7 +134,7 @@ class TestPokemon(object):
             nature_change=1.0,
             pokemon_stat=test_pokemon_stats['pokemon_stat_hp'],
             base_stat=test_base_stats['hp'],
-            ivs_int=test_ivs['hp'],
+            ivs_int=test_ivs['hp'][0],
             estimate_hp=True
         )
         assert estimate_evs_hp == 252
@@ -124,7 +143,7 @@ class TestPokemon(object):
             nature_change=1.0,
             pokemon_stat=test_pokemon_stats['pokemon_stat_spcl_def'],
             base_stat=test_base_stats['spcl_def'],
-            ivs_int=test_ivs['spcl_def'], 
+            ivs_int=test_ivs['spcl_def'][0], 
             estimate_hp=False
         )
         assert estimate_evs_spcl_def == test_evs['spcl_def']

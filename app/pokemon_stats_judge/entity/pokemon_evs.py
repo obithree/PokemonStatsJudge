@@ -17,6 +17,9 @@ class PokemonEffortValues:
             self._ev_check(stat, effort_value)
         self._ev_sum_check(evs_dict)
 
+    def get_dict(self):
+        return dataclasses.asdict(self)
+
     @classmethod
     def _ev_check(cls, stat, effort_value):
         if effort_value > 255 or effort_value < 0:

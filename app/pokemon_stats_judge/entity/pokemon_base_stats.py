@@ -9,3 +9,6 @@ class PokemonBaseStats:
     spcl_atk: int
     spcl_def: int
     speed: int
+
+    def get_dict(self):
+        return dataclasses.asdict(self)

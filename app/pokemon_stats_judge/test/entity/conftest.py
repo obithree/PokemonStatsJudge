@@ -31,12 +31,12 @@ def test_pokemon_stats():
 @pytest.fixture(autouse=True, scope='class')
 def test_ivs():
     hinoyakoma_ivs = {
-        "hp": 23,
-        "phys_atk": 19,
+        "hp": [23],
+        "phys_atk": [19],
         "phys_def": [5, 6],
-        "spcl_atk": 21,
-        "spcl_def": 4,
-        "speed": 25
+        "spcl_atk": [21],
+        "spcl_def": [4],
+        "speed": [25]
     }
     return hinoyakoma_ivs
 

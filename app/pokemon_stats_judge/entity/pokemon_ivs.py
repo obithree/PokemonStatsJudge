@@ -19,6 +19,9 @@ class PokemonIndividualValues:
             print(f'{stat}: {individual_list}')
             self._iv_check(stat, individual_list)
 
+    def get_dict(self):
+        return dataclasses.asdict(self)
+
     @classmethod
     def _iv_check(cls, stat, individual_list):
         if max(individual_list) > 31 or max(individual_list) < 0:
