@@ -21,9 +21,9 @@ class PokemonEffortValues:
 
     def is_valid(self) -> None:
         evs_dict = self.get_dict()
-        for args_name, expected_args_type in self.__annotations__.items():
-            if not isinstance(evs_dict[args_name], expected_args_type):
-                raise InvalidArgumentTypeException(args_name, type(evs_dict[args_name]), expected_args_type)
+        for arg_name, expected_arg_type in self.__annotations__.items():
+            if not isinstance(evs_dict[arg_name], expected_arg_type):
+                raise InvalidArgumentTypeException(arg_name, type(evs_dict[arg_name]), expected_arg_type)
         for stat, effort_value in evs_dict.items():
             self._ev_check(stat, effort_value)
         self._ev_sum_check(evs_dict)
