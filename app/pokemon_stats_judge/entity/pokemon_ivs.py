@@ -21,10 +21,10 @@ class PokemonIndividualValues:
 
     def is_valid(self) -> None:
         ivs_dict = self.get_dict()
-        for args_name, args_type in self.__annotations__.items():
+        for arg_name, expected_arg_type in self.__annotations__.items():
             # Todo: 型チェックを動的になるよう修正
-            if not isinstance(ivs_dict[args_name], list):
-                raise InvalidArgumentTypeException(args_name, type(ivs_dict[args_name]), list)
+            if not isinstance(ivs_dict[arg_name], list):
+                raise InvalidArgumentTypeException(arg_name, type(ivs_dict[arg_name]), list)
         for stat, individual_list in ivs_dict.items():
             self._iv_check(stat, individual_list)
 
