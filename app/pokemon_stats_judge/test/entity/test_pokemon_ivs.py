@@ -3,6 +3,7 @@ import pytest
 from pokemon_stats_judge.entity.pokemon import Pokemon
 from pokemon_stats_judge.entity.pokemon import PokemonBaseStats
 from pokemon_stats_judge.entity.pokemon import PokemonIndividualValues
+from pokemon_stats_judge.entity.Exception.pokemon_exception import InvalidArgumentTypeException
 from pokemon_stats_judge.entity.Exception.pokemon_exception import InvalidIndividualValueException
 
 
@@ -29,6 +30,17 @@ class TestPokemonIndividualValues(object):
         )
         ivs_dict = ivs.get_dict()
         assert isinstance(ivs_dict, dict)
+
+    def test_is_valid(self, test_ivs):
+        with pytest.raises(InvalidArgumentTypeException):
+            PokemonIndividualValues(
+                hp=[7,8],
+                phys_atk=[7,8],
+                phys_def=[7,8],
+                spcl_atk=[7,8],
+                spcl_def=[7,8],
+                speed=39
+            )
 
     def test_schema_ivs_value(self, test_ivs):
         with pytest.raises(InvalidIndividualValueException):

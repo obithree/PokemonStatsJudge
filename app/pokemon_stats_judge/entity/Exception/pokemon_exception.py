@@ -5,6 +5,17 @@ class PokemonException(Exception):
     """PokemonEntityの例外のベースクラス"""
     pass
 
+class InvalidArgumentTypeException(Exception):
+    """Classのインスタンス化の際に引数の型が異なっている場合のエラー"""
+    def __init__(self, argument_name: object, argument_type: type, expected_argument_type: type):
+        self.argument_name = argument_name
+        self.argument_type = argument_type
+        self.expected_argument_type = expected_argument_type
+        pass
+
+    def __str___(self):
+        return f'引数の型が異なります。Argument: {self.argument_name} \nExpected: {self.expected_argument_type}\n Actulal: {self.argument_type}'
+
 class InvalidEffortValueException(PokemonException):
     """努力値クラスで送出される例外:一つの努力値が取れない値になっている際のエラー
     属性:

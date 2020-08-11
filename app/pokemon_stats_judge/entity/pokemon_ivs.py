@@ -1,5 +1,6 @@
 import dataclasses
 from typing import List
+from pokemon_stats_judge.entity.Exception.pokemon_exception import InvalidArgumentTypeException
 from pokemon_stats_judge.entity.Exception.pokemon_exception import InvalidIndividualValueException
 
 
@@ -12,17 +13,22 @@ class PokemonIndividualValues:
     spcl_def: List[int]
     speed: List[int]
 
-    def __post_init__(self):
-        ivs_dict = dataclasses.asdict(self)
-        print(ivs_dict)
-        for stat, individual_list in ivs_dict.items():
-            print(f'{stat}: {individual_list}')
-            self._iv_check(stat, individual_list)
+    def __post_init__(self) -> None:
+        self.is_valid()
 
-    def get_dict(self):
+    def get_dict(self) -> dict:
         return dataclasses.asdict(self)
 
+    def is_valid(self) -> None:
+        ivs_dict = self.get_dict()
+        for args_name, args_type in self.__annotations__.items():
+            # Todo: 型チェックを動的になるよう修正
+            if not isinstance(ivs_dict[args_name], list):
+                raise InvalidArgumentTypeException(args_name, type(ivs_dict[args_name]), list)
+        for stat, individual_list in ivs_dict.items():
+            self._iv_check(stat, individual_list)
+
     @classmethod
-    def _iv_check(cls, stat, individual_list):
+    def _iv_check(cls, stat: str, individual_list: list) -> None:
         if max(individual_list) > 31 or max(individual_list) < 0:
             raise InvalidIndividualValueException(stat, max(individual_list))
