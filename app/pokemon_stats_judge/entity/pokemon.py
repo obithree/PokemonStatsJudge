@@ -2,14 +2,17 @@ import dataclasses
 import os
 import math
 import json
+from .Exception.pokemon_exception import InvalidArgumentTypeException
 from .pokemon_base_stats import PokemonBaseStats
 from .pokemon_evs import PokemonEffortValues
 from .pokemon_ivs import PokemonIndividualValues
-from pokemon_stats_judge.entity.Exception.pokemon_exception import InvalidArgumentTypeException
 
 
 @dataclasses.dataclass(frozen=True)
 class Pokemon:
+    """ポケモンのエンティティ\n
+        能力値の実値とレベル、性格を含み、個体値、努力値、種族値オブジェクトを持つ。
+    """
     pokemon_name: str
     pokemon_level: int
     pokemon_nature: str
@@ -39,13 +42,20 @@ class Pokemon:
         pokemon_dict = vars(self)
         for arg_name, expected_arg_type in self.__annotations__.items():
             # 種族値、個体値、努力値は型がNoneの場合でもTrueを返す。
-            # Todo: もっと賢い方法に修正する。
-            if arg_name == 'pokemon_base_stats' or arg_name ==  'pokemon_ivs' or arg_name == 'pokemon_evs':
-                arg_type_is_valid = (isinstance(pokemon_dict[arg_name], expected_arg_type)) or (pokemon_dict[arg_name] is None)
+            # Todo: もっと賢い方法に修正する。 # pylint: disable=fixme
+            if arg_name in ('pokemon_base_stats', 'pokemon_ivs', 'pokemon_evs'):
+                arg_type_is_valid = (
+                    (isinstance(pokemon_dict[arg_name], expected_arg_type))
+                    or (pokemon_dict[arg_name] is None)
+                )
             else:
-                arg_type_is_valid = isinstance(pokemon_dict[arg_name], expected_arg_type)           
+                arg_type_is_valid = isinstance(pokemon_dict[arg_name], expected_arg_type)
             if not arg_type_is_valid:
-                raise InvalidArgumentTypeException(arg_name, type(pokemon_dict[arg_name]), expected_arg_type)
+                raise InvalidArgumentTypeException(
+                    arg_name,
+                    type(pokemon_dict[arg_name]),
+                    expected_arg_type
+                )
 
     def _get_pokemon_stat_dict(self) -> dict:
         """ポケモンの能力値のみのdictを返す。
@@ -60,7 +70,7 @@ class Pokemon:
         }
         return pokemon_stat_dict
 
-    def get_pokemon_by_replaced_base_stats(self, base_stats:PokemonBaseStats) -> 'Pokemon':
+    def get_pokemon_by_replaced_base_stats(self, base_stats: PokemonBaseStats) -> 'Pokemon':
         """種族値を入れた自身を返す。
         """
         update_pokemon = dataclasses.replace(self, pokemon_base_stats=base_stats)
@@ -76,8 +86,11 @@ class Pokemon:
             estimate_ivs_dict, estimate_evs_dict = self._estimate_ivs_and_evs()
             pokemon_ivs = PokemonIndividualValues(**estimate_ivs_dict)
             pokemon_evs = PokemonEffortValues(**estimate_evs_dict)
-            update_pokemon = dataclasses.replace(self, pokemon_ivs=pokemon_ivs, pokemon_evs=pokemon_evs)
-            return update_pokemon
+            update_pokemon = dataclasses.replace(
+                self, pokemon_ivs=pokemon_ivs,
+                pokemon_evs=pokemon_evs
+            )
+        return update_pokemon
 
     def _estimate_ivs_and_evs(self) -> (dict, dict):
         """種族値と実値から個体値と努力値を推測する。\n
@@ -91,10 +104,7 @@ class Pokemon:
         estimate_evs_dict = {}
         for stat_name in stats_list:
             # 推測時に計算式がHPとその他で違うため、それのフラグを作成
-            if stat_name == "hp":
-                estimate_hp = True
-            else:
-                estimate_hp = False
+            estimate_hp = stat_name == "hp"
             # 個体値の推測
             estimate_ivs = self._estimate_stat_ivs(
                 self.pokemon_level,
@@ -133,15 +143,13 @@ class Pokemon:
             return nature_change_dict[pokemon_nature]
 
     @classmethod
-    def _estimate_stat_ivs(
-                            cls,
-                            level: int,
-                            nature_change: float,
-                            pokemon_stat: int,
-                            base_stat: int,
-                            evs_int: int = 0,
-                            estimate_hp: bool = False
-        ) -> list:
+    def _estimate_stat_ivs(cls,
+                           level: int,
+                           nature_change: float,
+                           pokemon_stat: int,
+                           base_stat: int,
+                           evs_int: int = 0,
+                           estimate_hp: bool = False) -> list:
         """努力値を0として扱い、個体値を計算する。\n
         仮に努力値が振られて個体値が31を超えている場合でも、その値を返す。\n
         属性：
@@ -159,25 +167,29 @@ class Pokemon:
         estimate_ivs_list = []
         # 0から31の数字で総当りを行う。切り捨てで一致したものをlistにいれる。
         for estimate_ivs_i in range(32):
-            estimate_pokemon_stat = ((base_stat * 2 + estimate_ivs_i + (evs_int / 4)) * level / 100 + stat_change) * nature_change
+            estimate_pokemon_stat = (
+                (
+                    (base_stat * 2 + estimate_ivs_i + (evs_int / 4)) * level / 100 + stat_change
+                ) * nature_change
+            )
             if pokemon_stat == int(estimate_pokemon_stat):
                 estimate_ivs_list.append(estimate_ivs_i)
         # listが空で、ivsを直接計算した時、31を超えていた場合、推定値をlistに入れる。これは努力値を振っている印
         if not estimate_ivs_list:
-            estimate_ivs = ( 100 * ( pokemon_stat / nature_change - stat_change ) / level ) - ( base_stat * 2 ) - ( evs_int / 4 )
+            estimate_ivs = (
+                (100 * (pokemon_stat / nature_change - stat_change) / level) - (base_stat * 2) - (evs_int / 4)
+            )
             estimate_ivs_list.append(estimate_ivs)
         return estimate_ivs_list
 
     @classmethod
-    def _estimate_stat_evs(
-                            cls,
-                            level: int,
-                            nature_change: float,
-                            pokemon_stat: int,
-                            base_stat: int,
-                            ivs_int: int,
-                            estimate_hp=False
-        ) -> int:
+    def _estimate_stat_evs(cls,
+                           level: int,
+                           nature_change: float,
+                           pokemon_stat: int,
+                           base_stat: int,
+                           ivs_int: int,
+                           estimate_hp=False) -> int:
         """実値、個体値、種族値から努力値を計算する。
         属性：
               level: ポケモンのレベル
@@ -191,5 +203,7 @@ class Pokemon:
             stat_change = level + 10
         else:
             stat_change = 5
-        estimate_evs = 4 * ( math.ceil( 100 * ( pokemon_stat / nature_change - stat_change ) / level ) - ( base_stat * 2 ) - ivs_int )
+        estimate_evs = (
+            4 * (math.ceil(100 * (pokemon_stat / nature_change - stat_change) / level) - (base_stat * 2) - ivs_int)
+        )
         return int(estimate_evs)
