@@ -4,6 +4,7 @@ from pokemon_stats_judge.entity.pokemon import Pokemon
 from pokemon_stats_judge.entity.pokemon import PokemonBaseStats
 from pokemon_stats_judge.entity.pokemon import PokemonEffortValues
 from pokemon_stats_judge.entity.pokemon import PokemonIndividualValues
+from pokemon_stats_judge.entity.Exception.pokemon_exception import InvalidArgumentTypeException
 from pokemon_stats_judge.entity.Exception.pokemon_exception import InvalidEffortValueException
 from pokemon_stats_judge.entity.Exception.pokemon_exception import InvalidEffortValuesException
 
@@ -31,6 +32,17 @@ class TestPokemonEffortValues(object):
         )
         evs_dict = evs.get_dict()
         assert isinstance(evs_dict, dict)
+
+    def test_is_valid(self, test_evs):
+        with pytest.raises(InvalidArgumentTypeException):
+            PokemonEffortValues(
+                hp=252,
+                phys_atk=252,
+                phys_def=252,
+                spcl_atk=252,
+                spcl_def=252,
+                speed=[252]
+            )
 
     def test_schema_evs_value(self, test_evs):
         with pytest.raises(InvalidEffortValueException):
