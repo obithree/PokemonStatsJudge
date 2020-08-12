@@ -25,7 +25,7 @@ class PokemonBaseStats:
         return dataclasses.asdict(self)
 
     def is_valid(self) -> None:
-        """ポケモンの能力値のみのdictを返す。
+        """型チェック、スキーマチェックを実行する。
         """
         evs_dict = self.get_dict()
         for arg_name, expected_arg_type in self.__annotations__.items(): # pylint: disable=no-member
