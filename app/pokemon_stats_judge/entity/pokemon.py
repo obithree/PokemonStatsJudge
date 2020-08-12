@@ -1,3 +1,4 @@
+"""Entity of Pokemon"""
 import dataclasses
 import os
 import math
@@ -40,7 +41,7 @@ class Pokemon:
         """型チェック、スキーマチェックを実行する。
         """
         pokemon_dict = vars(self)
-        for arg_name, expected_arg_type in self.__annotations__.items():
+        for arg_name, expected_arg_type in self.__annotations__.items(): # pylint: disable=no-member
             # 種族値、個体値、努力値は型がNoneの場合でもTrueを返す。
             # Todo: もっと賢い方法に修正する。 # pylint: disable=fixme
             if arg_name in ('pokemon_base_stats', 'pokemon_ivs', 'pokemon_evs'):
