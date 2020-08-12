@@ -1,4 +1,4 @@
-import unittest
+"""Test IndividualValues"""
 import pytest
 from pokemon_stats_judge.entity.pokemon import Pokemon
 from pokemon_stats_judge.entity.pokemon import PokemonBaseStats
@@ -7,8 +7,12 @@ from pokemon_stats_judge.entity.Exception.pokemon_exception import InvalidArgume
 from pokemon_stats_judge.entity.Exception.pokemon_exception import InvalidIndividualValueException
 
 
-class TestPokemonIndividualValues(object):
+class TestPokemonIndividualValues:
+    """個体値のテスト用クラス
+    """
     def test_create_ivs(self, test_ivs):
+        """正しい値を入れて作成できるか確認する。
+        """
         ivs = PokemonIndividualValues(
             hp=test_ivs['hp'],
             phys_atk=test_ivs['phys_atk'],
@@ -20,6 +24,8 @@ class TestPokemonIndividualValues(object):
         assert ivs.hp[0] is 23
 
     def test_get_dict(self, test_ivs):
+        """get_dictメソッドでdict型を返すかテストする。
+        """
         ivs = PokemonIndividualValues(
             hp=test_ivs['hp'],
             phys_atk=test_ivs['phys_atk'],
@@ -32,6 +38,8 @@ class TestPokemonIndividualValues(object):
         assert isinstance(ivs_dict, dict)
 
     def test_is_valid(self, test_ivs):
+        """入るはずのないlist型を渡して"InvalidArgumentTypeException"が出るか確認する。
+        """
         with pytest.raises(InvalidArgumentTypeException):
             PokemonIndividualValues(
                 hp=[7,8],
@@ -43,6 +51,8 @@ class TestPokemonIndividualValues(object):
             )
 
     def test_schema_ivs_value(self, test_ivs):
+        """個体値の最大の31を超えた数字を入れた場合、"InvalidIndividualValueException"が出るか確認する。
+        """
         with pytest.raises(InvalidIndividualValueException):
             PokemonIndividualValues(
                 hp=[7,8],
