@@ -1,3 +1,4 @@
+"""Entity of EffortValues"""
 import dataclasses
 from pokemon_stats_judge.entity.Exception.pokemon_exception import InvalidArgumentTypeException
 from pokemon_stats_judge.entity.Exception.pokemon_exception import InvalidEffortValueException
@@ -6,6 +7,8 @@ from pokemon_stats_judge.entity.Exception.pokemon_exception import InvalidEffort
 
 @dataclasses.dataclass(frozen=True)
 class PokemonEffortValues:
+    """ポケモンの努力値
+    """
     hp: int
     phys_atk: int
     phys_def: int
@@ -14,16 +17,26 @@ class PokemonEffortValues:
     speed: int
 
     def __post_init__(self) -> None:
+        """初期化時に型チェックとスキーマチェックのためにis_valid()を実行する。
+        """
         self.is_valid()
 
     def get_dict(self) -> dict:
+        """自身をdict型に変換したものを返す。
+        """
         return dataclasses.asdict(self)
 
     def is_valid(self) -> None:
+        """型チェック、スキーマチェックを実行する。
+        """
         evs_dict = self.get_dict()
-        for arg_name, expected_arg_type in self.__annotations__.items():
+        for arg_name, expected_arg_type in self.__annotations__.items(): # pylint: disable=no-member
             if not isinstance(evs_dict[arg_name], expected_arg_type):
-                raise InvalidArgumentTypeException(arg_name, type(evs_dict[arg_name]), expected_arg_type)
+                raise InvalidArgumentTypeException(
+                    arg_name,
+                    type(evs_dict[arg_name]),
+                    expected_arg_type
+                )
         for stat, effort_value in evs_dict.items():
             self._ev_check(stat, effort_value)
         self._ev_sum_check(evs_dict)

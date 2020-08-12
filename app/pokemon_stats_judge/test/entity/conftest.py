@@ -1,8 +1,11 @@
+"""ポケモン用のテストデータ"""
 import pytest
 
 
 @pytest.fixture(autouse=True, scope='class')
 def test_base_stats():
+    """種族値のテストデータ
+    """
     hinoyakoma_base_stats = {
         'hp': 62,
         'phys_atk': 73,
@@ -15,6 +18,8 @@ def test_base_stats():
 
 @pytest.fixture(autouse=True, scope='class')
 def test_pokemon_stats():
+    """実値のテストデータ
+    """
     hinoyakoma_stats = {
         'pokemon_name': 'ヒノヤコマ',
         'pokemon_level': 100,
@@ -30,6 +35,8 @@ def test_pokemon_stats():
 
 @pytest.fixture(autouse=True, scope='class')
 def test_ivs():
+    """個体値のテストデータ
+    """
     hinoyakoma_ivs = {
         "hp": [23],
         "phys_atk": [19],
@@ -42,6 +49,8 @@ def test_ivs():
 
 @pytest.fixture(autouse=True, scope='class')
 def test_evs():
+    """努力値のテストデータ
+    """
     hinoyakoma_evs = {
         "hp": 252,
         "phys_atk": 0,
