@@ -20,4 +20,3 @@ class TestPokemonUseCase:
         judged_pokemon = pokemon_use_case.pokemon_status_judge(request_object=test_pokemon_stats)
         assert judged_pokemon['pokemon_evs']['hp'] == 220
         assert judged_pokemon['pokemon_ivs']['hp'] == [31]
-        pass

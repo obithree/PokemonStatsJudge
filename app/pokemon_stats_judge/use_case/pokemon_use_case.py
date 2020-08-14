@@ -11,7 +11,6 @@ class PokemonUseCase:
         """引数を受け取り初期化する。
         """
         self.pokemon_repository = pokemon_repository
-        pass
 
     def pokemon_status_judge(self, request_object: dict) -> dict:
         """ポケモンの個体値と努力値を推測し、dictで返す。
