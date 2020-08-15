@@ -12,7 +12,7 @@ class PokemonDataStore(PokemonRepository):
     """
 
     @classmethod
-    def get_base_stats(cls, pokemon: Pokemon) -> dict:
+    def get_base_stats(cls, pokemon: Pokemon) -> 'PokemonBaseStats':
         """ポケモンの種族値リストのdictを取得する。
         その後、ポケモンの名前で種族値のみを返す。
         このファイルと同じパスに存在する"pokemon_base_stats.json"を読み込む。
