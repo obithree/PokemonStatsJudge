@@ -1,0 +1,42 @@
+{
+    "ヤヤコマ": {
+        "No": 661,
+        "pokemon_name": "ヤヤコマ",
+        "base_stats": {
+            "normal_form":{
+                "hp": 45,
+                "phys_atk": 50,
+                "phys_def": 43,
+                "spcl_atk": 40,
+                "spcl_def": 38,
+                "speed": 62
+            }
+        }
+    },
+    "ヒノヤコマ": {
+        "No": 662,
+        "base_stats": {
+            "normal_form":{
+                "hp": 62,
+                "phys_atk": 73,
+                "phys_def": 55,
+                "spcl_atk": 56,
+                "spcl_def": 52,
+                "speed": 84
+            }
+        }
+    },
+    "ファイアロー": {
+        "No": 663,
+        "base_stats": {
+            "normal_form":{
+                "hp": 78,
+                "phys_atk": 81,
+                "phys_def": 71,
+                "spcl_atk": 74,
+                "spcl_def": 69,
+                "speed": 126
+            }
+        }
+    }
+}
