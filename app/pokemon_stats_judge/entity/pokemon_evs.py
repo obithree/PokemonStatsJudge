@@ -49,6 +49,5 @@ class PokemonEffortValues:
     @classmethod
     def _ev_sum_check(cls, evs_dict: list) -> None:
         evs_sum = sum(evs_dict.values())
-        print(evs_sum)
         if evs_sum > 510 or evs_sum < 0:
             raise InvalidEffortValuesException(evs_sum)
