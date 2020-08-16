@@ -11,22 +11,11 @@ class LambdaController:
         """初期化時の処理
             data_storeをインスタンス化し、それをuse_caseに渡す。
             ※use_caseはrepositoryを受け取るが、data_storeはrepositoryはそれを継承している。
-            各種ポケモンの値を環境変数から受け取る。
         """
         self.pokemon_data_store = PokemonDataStore()
         self.pokemon_use_case = PokemonUseCase(
             pokemon_repository=self.pokemon_data_store
         )
-
-        self.pokemon_name = os.environ['pokemon_name']
-        self.pokemon_level = int(os.environ['pokemon_level'])
-        self.pokemon_nature = os.environ['pokemon_nature']
-        self.pokemon_stat_hp = int(os.environ['pokemon_stat_hp'])
-        self.pokemon_stat_phys_atk = int(os.environ['pokemon_stat_phys_atk'])
-        self.pokemon_stat_phys_def = int(os.environ['pokemon_stat_phys_def'])
-        self.pokemon_stat_spcl_atk = int(os.environ['pokemon_stat_spcl_atk'])
-        self.pokemon_stat_spcl_def = int(os.environ['pokemon_stat_spcl_def'])
-        self.pokemon_stat_speed = int(os.environ['pokemon_stat_speed'])
 
     def stats_judge_controller(self):
         """request_objectを"_get_request_object"から作成し、それをuse_caseに渡す。
@@ -36,17 +25,17 @@ class LambdaController:
         return judged_pokemon
 
     def _get_request_object(self):
-        """request_objectをインスタンス変数から作成する。
+        """request_objectを環境変数から作成する。
         """
         request_object = {
-            'pokemon_name': self.pokemon_name,
-            'pokemon_level': self.pokemon_level,
-            'pokemon_nature': self.pokemon_nature,
-            'pokemon_stat_hp': self.pokemon_stat_hp,
-            'pokemon_stat_phys_atk': self.pokemon_stat_phys_atk,
-            'pokemon_stat_phys_def': self.pokemon_stat_phys_def,
-            'pokemon_stat_spcl_atk': self.pokemon_stat_spcl_atk,
-            'pokemon_stat_spcl_def': self.pokemon_stat_spcl_def,
-            'pokemon_stat_speed': self.pokemon_stat_speed
+            'pokemon_name': os.environ['pokemon_name'],
+            'pokemon_level': int(os.environ['pokemon_level']),
+            'pokemon_nature': os.environ['pokemon_nature'],
+            'pokemon_stat_hp': int(os.environ['pokemon_stat_hp']),
+            'pokemon_stat_phys_atk': int(os.environ['pokemon_stat_phys_atk']),
+            'pokemon_stat_phys_def': int(os.environ['pokemon_stat_phys_def']),
+            'pokemon_stat_spcl_atk': int(os.environ['pokemon_stat_spcl_atk']),
+            'pokemon_stat_spcl_def': int(os.environ['pokemon_stat_spcl_def']),
+            'pokemon_stat_speed': int(os.environ['pokemon_stat_speed'])
         }
         return request_object
