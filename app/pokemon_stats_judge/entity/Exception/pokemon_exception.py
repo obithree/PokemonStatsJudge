@@ -13,7 +13,7 @@ class InvalidArgumentTypeException(Exception):
         self.expected_argument_type = expected_argument_type
         pass
 
-    def __str___(self):
+    def __str__(self):
         return f'引数の型が異なります。Argument: {self.argument_name} \nExpected: {self.expected_argument_type}\n Actulal: {self.argument_type}'
 
 class InvalidEffortValueException(PokemonException):
@@ -26,7 +26,7 @@ class InvalidEffortValueException(PokemonException):
         self.effort_value = effort_value
         pass
 
-    def __str___(self):
+    def __str__(self):
         return f'努力値の値が不正です。 {self.stat}: {self.effort_value}'
 
 class InvalidEffortValuesException(PokemonException):
@@ -36,7 +36,7 @@ class InvalidEffortValuesException(PokemonException):
         self.sum_effort_values = sum_effort_values
         pass
 
-    def __str___(self):
+    def __str__(self):
         return f'努力値の合計値が不正です。 SUM: {self.sum_effort_values}'
 
 class InvalidIndividualValueException(PokemonException):
@@ -47,5 +47,5 @@ class InvalidIndividualValueException(PokemonException):
         self.individual_value = individual_value
         pass
 
-    def __str___(self):
+    def __str__(self):
         return f'個体値の値が不正です。 {self.stat}: {self.individual_value}'
