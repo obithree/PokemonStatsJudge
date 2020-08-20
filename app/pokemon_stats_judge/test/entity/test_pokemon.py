@@ -2,7 +2,7 @@
 import pytest
 from pokemon_stats_judge.entity.pokemon import Pokemon
 from pokemon_stats_judge.entity.pokemon import PokemonBaseStats
-from pokemon_stats_judge.entity.Exception.pokemon_exception import InvalidArgumentTypeException
+from pokemon_stats_judge.entity.Exception.pokemon_exception import InvalidArgumentTypeError
 
 
 class TestPokemon:
@@ -45,7 +45,7 @@ class TestPokemon:
         assert isinstance(test_pokemon_dict, dict)
 
     def test_is_valid(self, test_pokemon_stats, test_base_stats):
-        """個体値、努力値の場所に種族値を入れて"InvalidArgumentTypeException"を返すか確認する。
+        """個体値、努力値の場所に種族値を入れて"InvalidArgumentTypeError"を返すか確認する。
         """
         pokemon_base_stats = PokemonBaseStats(
             test_base_stats['hp'],
@@ -55,7 +55,7 @@ class TestPokemon:
             test_base_stats['spcl_def'],
             test_base_stats['speed']
         )
-        with pytest.raises(InvalidArgumentTypeException):
+        with pytest.raises(InvalidArgumentTypeError):
             Pokemon(
                 test_pokemon_stats['pokemon_name'],
                 test_pokemon_stats['pokemon_level'],

@@ -1,8 +1,8 @@
 """Entity of EffortValues"""
 import dataclasses
-from pokemon_stats_judge.entity.Exception.pokemon_exception import InvalidArgumentTypeException
-from pokemon_stats_judge.entity.Exception.pokemon_exception import InvalidEffortValueException
-from pokemon_stats_judge.entity.Exception.pokemon_exception import InvalidEffortValuesException
+from pokemon_stats_judge.entity.Exception.pokemon_exception import InvalidArgumentTypeError
+from pokemon_stats_judge.entity.Exception.pokemon_exception import InvalidEffortValueError
+from pokemon_stats_judge.entity.Exception.pokemon_exception import InvalidEffortValuesError
 
 
 @dataclasses.dataclass(frozen=True)
@@ -32,7 +32,7 @@ class PokemonEffortValues:
         evs_dict = self.get_dict()
         for arg_name, expected_arg_type in self.__annotations__.items(): # pylint: disable=no-member
             if not isinstance(evs_dict[arg_name], expected_arg_type):
-                raise InvalidArgumentTypeException(
+                raise InvalidArgumentTypeError(
                     arg_name,
                     type(evs_dict[arg_name]),
                     expected_arg_type
@@ -44,10 +44,10 @@ class PokemonEffortValues:
     @classmethod
     def _ev_check(cls, stat: str, effort_value: int) -> None:
         if effort_value > 255 or effort_value < 0:
-            raise InvalidEffortValueException(stat, effort_value)
+            raise InvalidEffortValueError(stat, effort_value)
 
     @classmethod
     def _ev_sum_check(cls, evs_dict: list) -> None:
         evs_sum = sum(evs_dict.values())
         if evs_sum > 510 or evs_sum < 0:
-            raise InvalidEffortValuesException(evs_sum)
+            raise InvalidEffortValuesError(evs_sum)

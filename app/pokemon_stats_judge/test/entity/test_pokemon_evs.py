@@ -1,9 +1,9 @@
 """Test EffortValues"""
 import pytest
 from pokemon_stats_judge.entity.pokemon import PokemonEffortValues
-from pokemon_stats_judge.entity.Exception.pokemon_exception import InvalidArgumentTypeException
-from pokemon_stats_judge.entity.Exception.pokemon_exception import InvalidEffortValueException
-from pokemon_stats_judge.entity.Exception.pokemon_exception import InvalidEffortValuesException
+from pokemon_stats_judge.entity.Exception.pokemon_exception import InvalidArgumentTypeError
+from pokemon_stats_judge.entity.Exception.pokemon_exception import InvalidEffortValueError
+from pokemon_stats_judge.entity.Exception.pokemon_exception import InvalidEffortValuesError
 
 
 class TestPokemonEffortValues:
@@ -37,9 +37,9 @@ class TestPokemonEffortValues:
         assert isinstance(evs_dict, dict)
 
     def test_is_valid(self):
-        """素早さに入るはずのないlist型を渡して"InvalidArgumentTypeException"が出るか確認する。
+        """素早さに入るはずのないlist型を渡して"InvalidArgumentTypeError"が出るか確認する。
         """
-        with pytest.raises(InvalidArgumentTypeException):
+        with pytest.raises(InvalidArgumentTypeError):
             PokemonEffortValues(
                 hp=252,
                 phys_atk=252,
@@ -52,7 +52,7 @@ class TestPokemonEffortValues:
     def test_schema_evs_value(self):
         """努力値の最大値255を超えた値を入れるとエラーが出るか確認する。
         """
-        with pytest.raises(InvalidEffortValueException):
+        with pytest.raises(InvalidEffortValueError):
             PokemonEffortValues(
                 hp=300,
                 phys_atk=0,
@@ -64,7 +64,7 @@ class TestPokemonEffortValues:
     def test_schema_evs_values(self):
         """努力値の合計が510を超えていないか確認する。
         """
-        with pytest.raises(InvalidEffortValuesException):
+        with pytest.raises(InvalidEffortValuesError):
             PokemonEffortValues(
                 hp=252,
                 phys_atk=252,
