@@ -1,8 +1,8 @@
 """Entity of IndividualValues"""
 import dataclasses
 from typing import List
-from pokemon_stats_judge.entity.Exception.pokemon_exception import InvalidArgumentTypeError
-from pokemon_stats_judge.entity.Exception.pokemon_exception import InvalidIndividualValueError
+from pokemon_stats_judge.entity.error import InvalidArgumentTypeError
+from pokemon_stats_judge.entity.error import InvalidIndividualValueError
 
 
 @dataclasses.dataclass(frozen=True)

@@ -1,8 +1,8 @@
 """Entity of EffortValues"""
 import dataclasses
-from pokemon_stats_judge.entity.Exception.pokemon_exception import InvalidArgumentTypeError
-from pokemon_stats_judge.entity.Exception.pokemon_exception import InvalidEffortValueError
-from pokemon_stats_judge.entity.Exception.pokemon_exception import InvalidEffortValuesError
+from pokemon_stats_judge.entity.error import InvalidArgumentTypeError
+from pokemon_stats_judge.entity.error import InvalidEffortValueError
+from pokemon_stats_judge.entity.error import InvalidEffortValuesError
 
 
 @dataclasses.dataclass(frozen=True)

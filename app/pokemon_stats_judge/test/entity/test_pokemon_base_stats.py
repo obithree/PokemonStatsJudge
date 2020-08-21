@@ -1,7 +1,7 @@
 """Test BaseStats"""
 import pytest
 from pokemon_stats_judge.entity.pokemon import PokemonBaseStats
-from pokemon_stats_judge.entity.Exception.pokemon_exception import InvalidArgumentTypeError
+from pokemon_stats_judge.entity.error import InvalidArgumentTypeError
 
 
 class TestPokemonBaseStats:

@@ -1,6 +1,6 @@
 """Entity of PokemonBaseStats"""
 import dataclasses
-from pokemon_stats_judge.entity.Exception.pokemon_exception import InvalidArgumentTypeError
+from pokemon_stats_judge.entity.error import InvalidArgumentTypeError
 
 
 @dataclasses.dataclass(frozen=True)

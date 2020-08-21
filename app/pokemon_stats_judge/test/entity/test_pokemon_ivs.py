@@ -1,8 +1,8 @@
 """Test IndividualValues"""
 import pytest
 from pokemon_stats_judge.entity.pokemon import PokemonIndividualValues
-from pokemon_stats_judge.entity.Exception.pokemon_exception import InvalidArgumentTypeError
-from pokemon_stats_judge.entity.Exception.pokemon_exception import InvalidIndividualValueError
+from pokemon_stats_judge.entity.error import InvalidArgumentTypeError
+from pokemon_stats_judge.entity.error import InvalidIndividualValueError
 
 
 class TestPokemonIndividualValues:

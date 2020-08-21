@@ -1,9 +1,9 @@
 """Test EffortValues"""
 import pytest
 from pokemon_stats_judge.entity.pokemon import PokemonEffortValues
-from pokemon_stats_judge.entity.Exception.pokemon_exception import InvalidArgumentTypeError
-from pokemon_stats_judge.entity.Exception.pokemon_exception import InvalidEffortValueError
-from pokemon_stats_judge.entity.Exception.pokemon_exception import InvalidEffortValuesError
+from pokemon_stats_judge.entity.error import InvalidArgumentTypeError
+from pokemon_stats_judge.entity.error import InvalidEffortValueError
+from pokemon_stats_judge.entity.error import InvalidEffortValuesError
 
 
 class TestPokemonEffortValues:

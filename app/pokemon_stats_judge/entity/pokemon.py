@@ -3,7 +3,7 @@ import dataclasses
 import os
 import math
 import json
-from .Exception.pokemon_exception import InvalidArgumentTypeError
+from .error import InvalidArgumentTypeError
 from .pokemon_base_stats import PokemonBaseStats
 from .pokemon_evs import PokemonEffortValues
 from .pokemon_ivs import PokemonIndividualValues
