@@ -2,5 +2,6 @@
 
 
 class PokemonError(Exception):
-    """PokemonStatsJudgeのベースクラス"""
-    pass
+    """PokemonStatsJudge用のベースクラス
+    あらゆるレイヤーのエラーにこれを継承させる。
+    """
