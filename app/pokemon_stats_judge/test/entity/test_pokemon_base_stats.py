@@ -1,7 +1,7 @@
 """Test BaseStats"""
 import pytest
 from pokemon_stats_judge.entity.pokemon import PokemonBaseStats
-from pokemon_stats_judge.entity.Exception.pokemon_exception import InvalidArgumentTypeException
+from pokemon_stats_judge.entity.error import InvalidArgumentTypeError
 
 
 class TestPokemonBaseStats:
@@ -35,9 +35,9 @@ class TestPokemonBaseStats:
         assert isinstance(base_stats_dict, dict)
 
     def test_is_valid(self, test_base_stats):
-        """hpに入るはずのないlist型を渡して"InvalidArgumentTypeException"が出るか確認する。
+        """hpに入るはずのないlist型を渡して"InvalidArgumentTypeError"が出るか確認する。
         """
-        with pytest.raises(InvalidArgumentTypeException):
+        with pytest.raises(InvalidArgumentTypeError):
             PokemonBaseStats(
                 [100],
                 test_base_stats['phys_atk'],

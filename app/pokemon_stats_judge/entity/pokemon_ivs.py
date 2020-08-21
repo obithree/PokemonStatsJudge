@@ -1,8 +1,8 @@
 """Entity of IndividualValues"""
 import dataclasses
 from typing import List
-from pokemon_stats_judge.entity.Exception.pokemon_exception import InvalidArgumentTypeException
-from pokemon_stats_judge.entity.Exception.pokemon_exception import InvalidIndividualValueException
+from pokemon_stats_judge.entity.error import InvalidArgumentTypeError
+from pokemon_stats_judge.entity.error import InvalidIndividualValueError
 
 
 @dataclasses.dataclass(frozen=True)
@@ -33,7 +33,7 @@ class PokemonIndividualValues:
         for arg_name, expected_arg_type in self.__annotations__.items(): # pylint: disable=no-member,unused-variable
             # Todo: 型チェックを動的になるよう修正 # pylint: disable=fixme
             if not isinstance(ivs_dict[arg_name], list):
-                raise InvalidArgumentTypeException(
+                raise InvalidArgumentTypeError(
                     arg_name,
                     type(ivs_dict[arg_name]),
                     list
@@ -44,4 +44,4 @@ class PokemonIndividualValues:
     @classmethod
     def _iv_check(cls, stat: str, individual_list: list) -> None:
         if max(individual_list) > 31 or max(individual_list) < 0:
-            raise InvalidIndividualValueException(stat, max(individual_list))
+            raise InvalidIndividualValueError(stat, max(individual_list))

@@ -3,7 +3,7 @@ import dataclasses
 import os
 import math
 import json
-from .Exception.pokemon_exception import InvalidArgumentTypeException
+from .error import InvalidArgumentTypeError
 from .pokemon_base_stats import PokemonBaseStats
 from .pokemon_evs import PokemonEffortValues
 from .pokemon_ivs import PokemonIndividualValues
@@ -52,7 +52,7 @@ class Pokemon:
             else:
                 arg_type_is_valid = isinstance(pokemon_dict[arg_name], expected_arg_type)
             if not arg_type_is_valid:
-                raise InvalidArgumentTypeException(
+                raise InvalidArgumentTypeError(
                     arg_name,
                     type(pokemon_dict[arg_name]),
                     expected_arg_type

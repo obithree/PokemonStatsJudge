@@ -1,6 +1,6 @@
 """Entity of PokemonBaseStats"""
 import dataclasses
-from pokemon_stats_judge.entity.Exception.pokemon_exception import InvalidArgumentTypeException
+from pokemon_stats_judge.entity.error import InvalidArgumentTypeError
 
 
 @dataclasses.dataclass(frozen=True)
@@ -30,7 +30,7 @@ class PokemonBaseStats:
         evs_dict = self.get_dict()
         for arg_name, expected_arg_type in self.__annotations__.items(): # pylint: disable=no-member
             if not isinstance(evs_dict[arg_name], expected_arg_type):
-                raise InvalidArgumentTypeException(
+                raise InvalidArgumentTypeError(
                     arg_name,
                     type(evs_dict[arg_name]),
                     expected_arg_type

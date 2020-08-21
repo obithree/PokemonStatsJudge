@@ -4,8 +4,8 @@ import json
 from pokemon_stats_judge.repository.pokemon_repository import PokemonRepository
 from pokemon_stats_judge.entity.pokemon import Pokemon
 from pokemon_stats_judge.entity.pokemon_base_stats import PokemonBaseStats
-from .Exception.pokemon_data_store_exception import BaseStatsListJsonError
-from .Exception.pokemon_data_store_exception import BaseStatsNotFoundError
+from .error import BaseStatsListJsonError
+from .error import BaseStatsNotFoundError
 
 
 class PokemonDataStore(PokemonRepository):
