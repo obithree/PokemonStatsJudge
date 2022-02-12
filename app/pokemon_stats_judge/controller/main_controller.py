@@ -1,11 +1,15 @@
 """MainController"""
 import os
+# from app.pokemon_stats_judge.error import PokemonError
+from cerberus import Validator
+from pokemon_stats_judge.controller.error import InvalidRequestObjectError
+from pokemon_stats_judge.controller.request_schema import REQUEST_SCHEMA
+from pokemon_stats_judge.entity.pokemon import Pokemon
 from pokemon_stats_judge.use_case.pokemon_use_case import PokemonUseCase
 from pokemon_stats_judge.data_store.pokemon_data_store import PokemonDataStore
 
 class MainController:
-    """AWS Lambda用のController
-    環境変数で受け取ったポケモンの名前やレベル、性格、ステータスをreqest_objectにしてuse_caseに渡す。
+    """PokemonStatsJudgeの汎用Controller。
     """
     def __init__(self):
         """初期化時の処理
@@ -17,25 +21,15 @@ class MainController:
             pokemon_repository=self.pokemon_data_store
         )
 
-    def stats_judge_controller(self):
-        """request_objectを"_get_request_object"から作成し、それをuse_caseに渡す。
+    def stats_judge_controller(self, request_object: dict) -> Pokemon:
+        """request_objectを受け取りvalidatorにかけて、それをuse_caseに渡す。
         """
-        request_object = self._get_request_object()
+        if not self._validate_request_object(request_object):
+            raise InvalidRequestObjectError
         judged_pokemon = self.pokemon_use_case.pokemon_status_judge(request_object)
         return judged_pokemon
 
-    def _get_request_object(self):
-        """request_objectを環境変数から作成する。
-        """
-        request_object = {
-            'pokemon_name': os.environ['pokemon_name'],
-            'pokemon_level': int(os.environ['pokemon_level']),
-            'pokemon_nature': os.environ['pokemon_nature'],
-            'pokemon_stat_hp': int(os.environ['pokemon_stat_hp']),
-            'pokemon_stat_phys_atk': int(os.environ['pokemon_stat_phys_atk']),
-            'pokemon_stat_phys_def': int(os.environ['pokemon_stat_phys_def']),
-            'pokemon_stat_spcl_atk': int(os.environ['pokemon_stat_spcl_atk']),
-            'pokemon_stat_spcl_def': int(os.environ['pokemon_stat_spcl_def']),
-            'pokemon_stat_speed': int(os.environ['pokemon_stat_speed'])
-        }
-        return request_object
+    @staticmethod
+    def _validate_request_object(request_object: dict) -> None:
+        validator = Validator(REQUEST_SCHEMA)
+        return validator.validate(request_object)
