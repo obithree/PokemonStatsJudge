@@ -1,9 +1,9 @@
-"""LambdaController"""
+"""MainController"""
 import os
 from pokemon_stats_judge.use_case.pokemon_use_case import PokemonUseCase
 from pokemon_stats_judge.data_store.pokemon_data_store import PokemonDataStore
 
-class LambdaController:
+class MainController:
     """AWS Lambda用のController
     環境変数で受け取ったポケモンの名前やレベル、性格、ステータスをreqest_objectにしてuse_caseに渡す。
     """

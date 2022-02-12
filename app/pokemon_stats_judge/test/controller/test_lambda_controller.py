@@ -1,7 +1,7 @@
-"""Test LambdaController"""
+"""Test MainController"""
 import os
 from unittest import mock
-from pokemon_stats_judge.controller.lambda_controller import LambdaController
+from pokemon_stats_judge.controller.lambda_controller import MainController
 
 
 class TestPokemonController:
@@ -19,7 +19,7 @@ class TestPokemonController:
             mock.patch.dict(os.environ, {'pokemon_stat_spcl_atk': str(test_pokemon_stats['pokemon_stat_spcl_atk'])}), \
             mock.patch.dict(os.environ, {'pokemon_stat_spcl_def': str(test_pokemon_stats['pokemon_stat_spcl_def'])}), \
             mock.patch.dict(os.environ, {'pokemon_stat_speed': str(test_pokemon_stats['pokemon_stat_speed'])}):
-            lambda_controller = LambdaController()
+            lambda_controller = MainController()
             judged_pokemon = lambda_controller.stats_judge_controller()
             assert judged_pokemon['pokemon_base_stats']['hp'] == test_base_stats['hp']
             assert judged_pokemon['pokemon_ivs']['hp'] == [31]
